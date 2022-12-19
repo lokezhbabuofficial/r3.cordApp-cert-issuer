@@ -13,6 +13,8 @@ import static net.corda.core.contracts.ContractsDSL.requireThat;
 
 public class CourseCertificationContract implements Contract {
 
+	private static final CordaX500Name Examinar = CordaX500Name.parse("O=CordaExaminar,L=Tamilnadu,C=IN");
+
 	@Override
 	public void verify(@NotNull LedgerTransaction tx) throws IllegalArgumentException {
 		// Extract the command from the transaction.
@@ -22,12 +24,16 @@ public class CourseCertificationContract implements Contract {
 		if (commandData instanceof CourseCertificationContract.Commands.Issue) {
 			CourseCertificationState output = tx.outputsOfType(CourseCertificationState.class).get(0);
 			requireThat(require -> {
+				require.using("This transaction should not have any input",
+						tx.getInputs().isEmpty());
 				require.using("This transaction should only have one CourseCertificationState state as output",
 						tx.getOutputs().size() == 1);
-				require.using("The output CourseCertificationState state should have the score gte 80",
+				require.using("The score has to be gte 80",
 						output.getScore() >= 80);
-				require.using("The output CourseCertificationState student cannot be an examinar",
-						!output.getStudent().getName().equals(CordaX500Name.parse("O=CordaExaminar,L=Tamilnadu,C=IN")));
+				require.using("The student cannot be an examinar",
+						!output.getStudent().getName().equals(Examinar));
+				require.using("Selected examinar is not an actual examinar",
+						output.getExaminer().getName().equals(Examinar));
 				return null;
 			});
 		} else {
