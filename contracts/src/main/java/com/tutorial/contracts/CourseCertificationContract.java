@@ -28,8 +28,8 @@ public class CourseCertificationContract implements Contract {
 						tx.getInputs().isEmpty());
 				require.using("This transaction should only have one CourseCertificationState state as output",
 						tx.getOutputs().size() == 1);
-				require.using("The score has to be gte 80",
-						output.getScore() >= 80);
+				require.using("The score has to be above 80 and less than 100",
+						output.getScore() >= 80 && output.getScore() <= 100);
 				require.using("The student cannot be an examinar",
 						!output.getStudent().getName().equals(Examinar));
 				require.using("Selected examinar is not an actual examinar",
