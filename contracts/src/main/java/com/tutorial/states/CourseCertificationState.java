@@ -35,7 +35,6 @@ public class CourseCertificationState implements LinearState {
 
 	@Override
 	@NotNull
-	
 	public List<AbstractParty> getParticipants() {
 		return participants;
 	}
