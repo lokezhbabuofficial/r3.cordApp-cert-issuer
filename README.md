@@ -21,6 +21,12 @@
 * All the parties signs the transactions
 * `CourseCertificateState` issued to each of the Students
 
+### Flow cmd reference
+On `CordaExaminar` Node execute bellow for positive flow
+```shell
+flow start BulkStudentIssueCourseCertificationFlow$BulkStudentIssueCourseCertificationFlowInitiator students: ["O=Lokesh,L=Delhi,C=IN", "O=Peter,L=New York,C=US"], studentScores: [80, 85]
+```
+
 ## Case 3: **!!(TODO)!!**
 
 ***Trying to consume and input state and provide a new output state (to see notary in action) and using LinearPointer, StaticPointers***
