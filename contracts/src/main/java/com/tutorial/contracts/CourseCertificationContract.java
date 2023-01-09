@@ -1,22 +1,22 @@
 package com.tutorial.contracts;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.tutorial.states.CourseCertificationState;
 
-import net.corda.core.contracts.CommandData;
-import net.corda.core.contracts.Contract;
-import net.corda.core.identity.CordaX500Name;
-import net.corda.core.transactions.LedgerTransaction;
+import net.corda.v5.application.identity.CordaX500Name;
+import net.corda.v5.ledger.contracts.CommandData;
+import net.corda.v5.ledger.contracts.Contract;
+import net.corda.v5.ledger.transactions.LedgerTransaction;
 
-import static net.corda.core.contracts.ContractsDSL.requireThat;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import static net.corda.v5.ledger.contracts.ContractsDSL.requireThat;
 
 public class CourseCertificationContract implements Contract {
 
-	private static final CordaX500Name Examinar = CordaX500Name.parse("O=CordaExaminar,L=Tamilnadu,C=IN");
+	private static final CordaX500Name Examinar = CordaX500Name.parse("O=CordaExaminar, L=Tamilnadu, C=IN");
 
 	@Override
 	public void verify(@NotNull LedgerTransaction tx) throws IllegalArgumentException {

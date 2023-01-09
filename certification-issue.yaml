@@ -1,0 +1,28 @@
+nodes:
+  Examinar:
+    debug: true
+    x500: "O=CordaExaminar, L=Tamilnadu, C=IN"
+    users:
+      user1:
+        password: test
+      examinaar:
+        password: password
+        permissions: [ "ALL" ]
+  Peter:
+    x500: "O=Peter, L=New York, C=US"
+    users:
+      user1:
+        password: test
+      peteer:
+        password: password
+        permissions: [ "ALL" ]
+  Lokesh:
+    x500: "O=Lokesh, L=Delhi, C=IN"
+    users:
+      user1:
+        password: test
+      lokezh:
+        password: password
+        permissions: [ "ALL" ]
+  notary:
+    notary: true

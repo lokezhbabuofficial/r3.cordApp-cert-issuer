@@ -7,14 +7,15 @@ import org.jetbrains.annotations.NotNull;
 
 import com.tutorial.contracts.CourseCertificationContract;
 
-import net.corda.core.contracts.BelongsToContract;
-import net.corda.core.contracts.LinearState;
-import net.corda.core.contracts.UniqueIdentifier;
-import net.corda.core.identity.AbstractParty;
-import net.corda.core.identity.Party;
+import net.corda.v5.application.identity.AbstractParty;
+import net.corda.v5.application.identity.Party;
+import net.corda.v5.application.utilities.JsonRepresentable;
+import net.corda.v5.ledger.UniqueIdentifier;
+import net.corda.v5.ledger.contracts.BelongsToContract;
+import net.corda.v5.ledger.contracts.LinearState;
 
 @BelongsToContract(CourseCertificationContract.class)
-public class CourseCertificationState implements LinearState {
+public class CourseCertificationState implements LinearState, JsonRepresentable {
 
 	private Party student;
 	private Party examiner;
@@ -60,5 +61,10 @@ public class CourseCertificationState implements LinearState {
 	public UniqueIdentifier getLinerId() {
 		return linerId;
 	}
+
+  @Override
+  public String toJsonString() {
+    return "examinar: " + examiner + " student: " + student + " score: " + score;
+  }
 
 }
