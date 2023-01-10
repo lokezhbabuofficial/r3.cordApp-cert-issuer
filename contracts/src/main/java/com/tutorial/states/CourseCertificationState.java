@@ -46,10 +46,12 @@ public class CourseCertificationState implements LinearState, JsonRepresentable 
 		return linerId;
 	}
 
+	@NotNull
 	public Party getExaminer() {
 		return examiner;
 	}
 
+	@NotNull
 	public Party getStudent() {
 		return student;
 	}
@@ -64,7 +66,7 @@ public class CourseCertificationState implements LinearState, JsonRepresentable 
 
   @Override
   public String toJsonString() {
-    return "examinar: " + examiner + " student: " + student + " score: " + score;
+    return "examinar: " + examiner + ", student: " + student + ", score: " + score;
   }
 
 }

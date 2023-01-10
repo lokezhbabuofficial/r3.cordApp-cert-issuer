@@ -22,15 +22,6 @@
 7. When deployed check the status with corda-cli `corda-cli network status -n certification-issue` note the mapped web ports for Http RPC
 8. Install the application on the network using corda-cli `corda-cli package install -n certification-issue certification-issue.cpb`
 
-## Case 1:
-
-**_Trying to achieve a basic example_**
-
-- Student => Asks for Course Certification by passing the score
-- Creates a new output `CourseCertificateState` using the `CourseCertificateContract.Command.Issue`
-- Both Signs the transaction
-- `CourseCertificateState` issued to Student
-
 ### Testing VIA Swagger
 
 - Using the port noted from the network status visit `https://localhost:<port>/api/v1/swagger`
@@ -42,7 +33,16 @@
   | Peter    | peteer    | password |
   | Lokesh   | lokezh    | password |
 
-- To issue a certificate start the `CourseCertificationFlow` from `Peter` or `Lokesh` nodes via the Start Flow api by passing something similar
+## Case 1:
+
+**_Trying to achieve a basic example_**
+
+- Student => Asks for Course Certification by passing the score
+- Creates a new output `CourseCertificateState` using the `CourseCertificateContract.Command.Issue`
+- Both Signs the transaction
+- `CourseCertificateState` issued to Student
+
+### To issue a certificate start the `CourseCertificationFlow` from `Peter` or `Lokesh` nodes via the Start Flow api by passing something similar
 
 ```json
 {
@@ -56,7 +56,7 @@
 }
 ```
 
-- To Query the vault
+### To Query the vault
 
 ```json
 {
@@ -83,6 +83,39 @@
 - Initiates flow for all the output state (students) by including their `getOwningKey()`
 - All the parties signs the transactions
 - `CourseCertificateState` issued to each of the Students
+
+
+### To issue a certificate start the `CourseCertificationFlow` from `Peter` or `Lokesh` nodes via the Start Flow api by passing something similar
+
+```json
+{
+	"rpcStartFlowRequest": {
+		"clientId": "<client-id>",
+		"flowName": "com.tutorial.BulkStudentIssueCourseCertificationFlowInitator",
+		"parameters": {
+			"parametersInJson": "[{\"participant\":\"O=Peter, L=New York, C=US\",\"score\":85},{\"participant\":\"O=Lokesh, L=Delhi, C=IN\",\"score\":95}]"
+		}
+	}
+}
+```
+
+### To Query the vault !!--- Make sure you use the txId for identifing the appropiate state ---!!
+
+```json
+{
+	"filterRequest": {
+		"contractStateClassNames": ["com.tutorial.states.CourseCertificationState"],
+		"txIds": [
+			"<txIds>"
+		]
+	},
+	"context": {
+		"awaitForResultTimeout": "PT1M",
+		"currentPosition": 0,
+		"maxCount": 10
+	}
+}
+```
 
 ## Web UI
 
