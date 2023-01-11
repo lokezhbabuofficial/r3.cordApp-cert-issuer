@@ -91,6 +91,9 @@ dependencies {
 //Task to deploy the nodes in order to bootstrap a network
 task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
 
+    logger.quiet("SDK version: {}", JavaVersion.current())
+    logger.quiet("JAVA HOME {}", System.getProperty("java.home"))
+
     /* This property will load the CorDapps to each of the node by default, including the Notary. You can find them
      * in the cordapps folder of the node at build/nodes/Notary/cordapps. However, the notary doesn't really understand
      * the notion of cordapps. In production, Notary does not need cordapps as well. This is just a short cut to load
