@@ -11,3 +11,62 @@
 **/node_modules/
 corda-nodeinfo/corda-nodeinfo.iml
 *~*
+# Corda5 gitignore
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+.idea
+.gradle
+
+*/build/*
+
+docker-compose.yaml
+*.cpb
+*.cpk
+
+# UI
+
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/.vscode
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
