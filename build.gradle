@@ -87,6 +87,27 @@ dependencies {
 
 }
 
+cordapp {
+    targetPlatformVersion 11
+    minimumPlatformVersion 5
+    contract {
+        name "Certificate Contracts"
+        vendor "Relevantz"
+        licence "Relevantz Licence"
+        versionId 1
+    }
+}
+
+cordapp {
+    targetPlatformVersion 11
+    minimumPlatformVersion 5
+    workflow {
+        name "Certificate Workflow"
+        vendor "Relevantz"
+        licence "Relevantz Licence"
+        versionId 1
+    }
+}
 
 //Task to deploy the nodes in order to bootstrap a network
 task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
@@ -119,7 +140,7 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         }
     }
     node {
-        name "O=Peter,L=New York,C=US"
+        name "O=Lokesh,L=Chennai,C=IN"
         p2pPort 10008
         rpcSettings {
             address("localhost:10009")
@@ -137,12 +158,72 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
     node {
-        name "O=Lokesh,L=Delhi,C=IN"
+        name "O=Varatharaj,L=Georgia,C=US"
         p2pPort 10014
         rpcSettings {
             address("localhost:10015")
             adminAddress("localhost:10055")
         }
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+    }
+}
+
+task prepareDockerNodes(type: net.corda.plugins.Dockerform, dependsOn: ['jar']) {
+
+    /* This property will load the CorDapps to each of the node by default, including the Notary. You can find them
+     * in the cordapps folder of the node at build/nodes/Notary/cordapps. However, the notary doesn't really understand
+     * the notion of cordapps. In production, Notary does not need cordapps as well. This is just a short cut to load
+     * the Corda network bootstrapper.
+     */
+    dockerImage="corda/community:4.9.3-zulu-openjdk8"
+
+    nodeDefaults {
+        projectCordapp {
+            deploy = false
+        }
+        cordapp project(':contracts')
+        cordapp project(':workflows')
+        runSchemaMigration = true //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
+        //problems for developers who are not familiar with Corda. If you are not using custom schemas, you can change
+        //it to false for quicker project compiling time.
+    }
+    node {
+        name "O=Notary,L=London,C=GB"
+        notary = [validating : false]
+        p2pPort 10200
+        rpcSettings {
+            address("localhost:10201")
+            adminAddress("localhost:10202")
+        }
+    }
+    node {
+        name "O=Lokesh,L=Chennai,C=IN"
+        p2pPort 10203
+        rpcSettings {
+            address("localhost:10204")
+            adminAddress("localhost:10205")
+        }
+        sshdPort 2222
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+    }
+    node {
+        name "O=CordaExaminar,L=Tamilnadu,C=IN"
+        p2pPort 10206
+        rpcSettings {
+            address("localhost:10207")
+            adminAddress("localhost:10208")
+        }
+        sshdPort 2223
+        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
+    }
+    node {
+        name "O=Varatharaj,L=Georgia,C=US"
+        p2pPort 10209
+        rpcSettings {
+            address("localhost:10210")
+            adminAddress("localhost:10211")
+        }
+        sshdPort 2224
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
 }
