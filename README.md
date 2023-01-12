@@ -74,7 +74,7 @@ Flow
 
 ## To clean and deploy nodes locally
 
-- gradlew clean prepareDockerNodes
+``` gradlew clean prepareDockerNodes ```
 
 ## To start / run the flow
 
@@ -84,10 +84,10 @@ Flow
 - Node Explorer ( To connect with the node and to do transaction )
 ## Issue certificate
 
-- flow start CourseCertificationFlow$CourseCertificationFlowInitiator examiner: "O=CordaExaminar,L=Tamilnadu,C=IN", score: 50
+``` flow start CourseCertificationFlow$CourseCertificationFlowInitiator examiner: "O=CordaExaminar,L=Tamilnadu,C=IN", score: 50 ```
 
 ## Bulk Issue certificate ( via Corda Examiner Node )
 
-- flow start BulkStudentIssueCourseCertificationFlow$BulkStudentIssueCourseCertificationFlowInitiator students: ["O=Lokesh,L=Chennai,C=IN", "O=Varatharaj,L=Georgia,C=US"], studentScores: [80, 85]
+``` flow start BulkStudentIssueCourseCertificationFlow$BulkStudentIssueCourseCertificationFlowInitiator students: ["O=Lokesh,L=Chennai,C=IN", "O=Varatharaj,L=Georgia,C=US"], studentScores: [80, 85] ```
 
 
