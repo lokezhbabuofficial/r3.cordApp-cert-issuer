@@ -20,7 +20,6 @@ public class CourseState implements LinearState {
 	private int coursePassScore;
 	private List<AbstractParty> participants;
 
-
 	public CourseState(Party owner, UniqueIdentifier courseId, String courseDec, int coursePassScore) {
 		this.owner = owner;
 		this.courseId = courseId;
@@ -43,28 +42,28 @@ public class CourseState implements LinearState {
 		return owner;
 	}
 
-	public UniqueIdentifier getCourseId() {
-		return courseId;
-	}
-
-	public String getCourseDec() {
-		return courseDec;
-	}
-
-	public int getCoursePassScore() {
-		return coursePassScore;
-	}
-
 	public void setOwner(Party owner) {
 		this.owner = owner;
+	}
+
+	public UniqueIdentifier getCourseId() {
+		return courseId;
 	}
 
 	public void setCourseId(UniqueIdentifier courseId) {
 		this.courseId = courseId;
 	}
 
+	public String getCourseDec() {
+		return courseDec;
+	}
+
 	public void setCourseDec(String courseDec) {
 		this.courseDec = courseDec;
+	}
+
+	public int getCoursePassScore() {
+		return coursePassScore;
 	}
 
 	public void setCoursePassScore(int coursePassScore) {
@@ -74,5 +73,5 @@ public class CourseState implements LinearState {
 	public void setParticipants(List<AbstractParty> participants) {
 		this.participants = participants;
 	}
-	
+
 }

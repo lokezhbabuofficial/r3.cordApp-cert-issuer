@@ -1,5 +1,7 @@
 package com.tutorial.flows;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +43,8 @@ public class SubscribeToCourseFlow {
 		@Override
 		@Suspendable
 		public SignedTransaction call() throws FlowException, NullPointerException {
+			final Instant instantNow = Instant.now();
+
 			final Party notary = getServiceHub().getNetworkMapCache()
 					.getNotary(CordaX500Name.parse("O=Notary,L=London,C=GB"));
 
@@ -53,9 +57,10 @@ public class SubscribeToCourseFlow {
 			if (!courseStateRefList.stream().anyMatch(state -> state.getState().getData().getLinearId().equals(courseId))) {
 				throw new FlowException("Course Not Found");
 			}
-
+			
 			CourseSubscriptionState courseSubscriptionState = new CourseSubscriptionState(subscriber, getOurIdentity(),
-					new UniqueIdentifier(), new LinearPointer<>(courseId, CourseState.class));
+					new UniqueIdentifier(), new LinearPointer<>(courseId, CourseState.class), instantNow, instantNow.plus(30,
+							ChronoUnit.SECONDS), true);
 
 			TransactionBuilder txBuilder = new TransactionBuilder(notary).addOutputState(courseSubscriptionState).addCommand(
 					new CourseSubscriptionContract.Commands.Issue(),

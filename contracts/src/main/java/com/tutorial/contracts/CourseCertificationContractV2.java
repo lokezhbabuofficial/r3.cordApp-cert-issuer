@@ -13,9 +13,7 @@ public class CourseCertificationContractV2 implements Contract {
 	}
 
 	public interface Commands extends CommandData {
-		class Create implements CourseCertificationContractV2.Commands {
-		}
-		class Update implements CourseCertificationContractV2.Commands {
+		class Issue implements CourseCertificationContractV2.Commands {
 		}
 	}
 

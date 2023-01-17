@@ -1,8 +1,13 @@
 package com.tutorial.flows;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.tutorial.contracts.CourseCertificationContractV2;
+import com.tutorial.contracts.CourseContract;
 import com.tutorial.states.CourseState;
 
 import co.paralleluniverse.fibers.Suspendable;
@@ -17,6 +22,7 @@ import net.corda.core.flows.InitiatingFlow;
 import net.corda.core.flows.ReceiveFinalityFlow;
 import net.corda.core.flows.SignTransactionFlow;
 import net.corda.core.flows.StartableByRPC;
+import net.corda.core.identity.AbstractParty;
 import net.corda.core.identity.CordaX500Name;
 import net.corda.core.identity.Party;
 import net.corda.core.transactions.SignedTransaction;
@@ -26,12 +32,10 @@ public class CreateCourseFlow {
 	@InitiatingFlow
 	@StartableByRPC
 	public static class CreateCourseFlowInitator extends FlowLogic<SignedTransaction> {
-		private Party examinar;
 		private String courseDec;
 		private int coursePassScore;
 
-		public CreateCourseFlowInitator(Party examinar, String courseDec, int coursePassScore) {
-			this.examinar = examinar;
+		public CreateCourseFlowInitator(String courseDec, int coursePassScore) {
 			this.courseDec = courseDec;
 			this.coursePassScore = coursePassScore;
 		}
@@ -41,27 +45,23 @@ public class CreateCourseFlow {
 		public SignedTransaction call() throws FlowException {
 			final Party notary = getServiceHub().getNetworkMapCache()
 					.getNotary(CordaX500Name.parse("O=Notary,L=London,C=GB"));
+			final Party examinar = getOurIdentity();
 
 			UniqueIdentifier uniqueID = new UniqueIdentifier();
 
 			CourseState courseState = new CourseState(examinar, uniqueID, courseDec, coursePassScore);
 
 			TransactionBuilder txBuilder = new TransactionBuilder(notary).addOutputState(courseState).addCommand(
-					new CourseCertificationContractV2.Commands.Create(),
+					new CourseContract.Commands.Create(),
 					Arrays.asList(getOurIdentity().getOwningKey(), examinar.getOwningKey()));
 
 			txBuilder.verify(getServiceHub());
+			
 			// Sign the transaction.
-			final SignedTransaction partSignedTx = getServiceHub().signInitialTransaction(txBuilder);
-
-			// Send the state to the counterparty, and receive it back with their signature.
-			FlowSession examinerSession = initiateFlow(examinar);
-
-			final SignedTransaction fullySignedTx = subFlow(
-					new CollectSignaturesFlow(partSignedTx, Arrays.asList(examinerSession)));
+			final SignedTransaction signedTransaction = getServiceHub().signInitialTransaction(txBuilder);
 
 			// Notarise and record the transaction in both parties' vaults.
-			return subFlow(new FinalityFlow(fullySignedTx, Arrays.asList(examinerSession)));
+			return subFlow(new FinalityFlow(signedTransaction, Collections.emptyList()));
 		}
 
 	}

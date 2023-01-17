@@ -15,6 +15,8 @@ public class CourseContract implements Contract {
 	public interface Commands extends CommandData {
 		class Create implements CourseContract.Commands {
 		}
+		class Update implements CourseCertificationContractV2.Commands {
+		}
 	}
 
 }

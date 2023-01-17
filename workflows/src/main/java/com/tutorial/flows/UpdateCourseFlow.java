@@ -1,9 +1,11 @@
 package com.tutorial.flows;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.UUID;
 
 import com.tutorial.contracts.CourseCertificationContractV2;
+import com.tutorial.contracts.CourseContract;
 import com.tutorial.states.CourseState;
 
 import co.paralleluniverse.fibers.Suspendable;
@@ -31,21 +33,29 @@ public class UpdateCourseFlow {
 	@InitiatingFlow
 	@StartableByRPC
 	public static class UpdateCourseFlowInitator extends FlowLogic<SignedTransaction> {
-		private Party examinar;
+		// private Party examinar;
 		private UniqueIdentifier courseId;
 		private String courseDec;
 		private int coursePassScore;
 
-		public UpdateCourseFlowInitator(Party examinar, UniqueIdentifier courseId, String courseDec, int coursePassScore) {
-			this.examinar = examinar;
+		// public UpdateCourseFlowInitator(Party examinar, UniqueIdentifier courseId, String courseDec, int coursePassScore) {
+		// 	this.examinar = examinar;
+		// 	this.courseId = courseId;
+		// 	this.courseDec = courseDec;
+		// 	this.coursePassScore = coursePassScore;
+		// }
+
+		public UpdateCourseFlowInitator(UniqueIdentifier courseId, String courseDec, int coursePassScore) {
 			this.courseId = courseId;
 			this.courseDec = courseDec;
 			this.coursePassScore = coursePassScore;
 		}
 
+
 		@Override
 		@Suspendable
 		public SignedTransaction call() throws FlowException {
+			final Party examinar = getOurIdentity();
 			final Party notary = getServiceHub().getNetworkMapCache()
 					.getNotary(CordaX500Name.parse("O=Notary,L=London,C=GB"));
 
@@ -57,25 +67,19 @@ public class UpdateCourseFlow {
 
 			CourseState outputCourseState = (CourseState) courseStateRef.getState().getData();
 			outputCourseState.setCourseDec(courseDec);
-			outputCourseState.setOwner(examinar);
 			outputCourseState.setCoursePassScore(coursePassScore);
 
 			TransactionBuilder txBuilder = new TransactionBuilder(notary).addInputState(courseStateRef)
-					.addOutputState(outputCourseState).addCommand(new CourseCertificationContractV2.Commands.Update(),
-							Arrays.asList(getOurIdentity().getOwningKey(), examinar.getOwningKey()));
+					.addOutputState(outputCourseState).addCommand(new CourseContract.Commands.Update(),
+							Arrays.asList(examinar.getOwningKey()));
 
 			txBuilder.verify(getServiceHub());
+			
 			// Sign the transaction.
-			final SignedTransaction partSignedTx = getServiceHub().signInitialTransaction(txBuilder);
-
-			// Send the state to the counterparty, and receive it back with their signature.
-			FlowSession examinerSession = initiateFlow(examinar);
-
-			final SignedTransaction fullySignedTx = subFlow(
-					new CollectSignaturesFlow(partSignedTx, Arrays.asList(examinerSession)));
+			final SignedTransaction signedTransaction = getServiceHub().signInitialTransaction(txBuilder);
 
 			// Notarise and record the transaction in both parties' vaults.
-			return subFlow(new FinalityFlow(fullySignedTx, Arrays.asList(examinerSession)));
+			return subFlow(new FinalityFlow(signedTransaction, Collections.emptyList()));
 		}
 
 	}

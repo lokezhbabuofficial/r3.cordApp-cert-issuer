@@ -6,7 +6,6 @@ import java.util.List;
 import com.tutorial.contracts.CourseCertificationContractV2;
 
 import net.corda.core.contracts.BelongsToContract;
-import net.corda.core.contracts.LinearPointer;
 import net.corda.core.contracts.LinearState;
 import net.corda.core.contracts.UniqueIdentifier;
 import net.corda.core.identity.AbstractParty;
@@ -17,18 +16,15 @@ public class CourseCertificationStateV2 implements LinearState {
 
 	private Party issuer;
 	private Party owner;
-	private float courseScore;
+	private Integer courseScore;
 	private UniqueIdentifier linearId;
-	private LinearPointer<CourseSubscriptionState>  courseSubscriptionId; 
 	private List<AbstractParty> participants;
 
-	public CourseCertificationStateV2(Party issuer, Party owner, float courseScore, UniqueIdentifier linearId,
-			LinearPointer<CourseSubscriptionState> courseSubscriptionId) {
+	public CourseCertificationStateV2(Party issuer, Party owner, Integer courseScore, UniqueIdentifier linearId) {
 		this.issuer = issuer;
 		this.owner = owner;
 		this.courseScore = courseScore;
 		this.linearId = linearId;
-		this.courseSubscriptionId = courseSubscriptionId;
 		this.participants = Arrays.asList(issuer, owner);
 	}
 
@@ -50,12 +46,7 @@ public class CourseCertificationStateV2 implements LinearState {
 		return owner;
 	}
 
-	public float getCourseScore() {
+	public Integer getCourseScore() {
 		return courseScore;
 	}
-
-	public LinearPointer<CourseSubscriptionState> getCourseSubscriptionId() {
-		return courseSubscriptionId;
-	}
-	
 }
