@@ -146,6 +146,13 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             address("localhost:10009")
             adminAddress("localhost:10049")
         }
+        extraConfig = [
+                "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
+                "dataSourceProperties.dataSource.url"     : "jdbc:postgresql://host.docker.internal:32769/Lokesh",
+                "dataSourceProperties.dataSource.user"    : 'postgres',
+                "dataSourceProperties.dataSource.password": 'postgrespw',
+                "jarDirs"                                 : ['${ rootProject.projectDir }/drivers']
+        ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
     node {
@@ -155,6 +162,13 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             address("localhost:10012")
             adminAddress("localhost:10052")
         }
+        extraConfig = [
+                "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
+                "dataSourceProperties.dataSource.url"     : "jdbc:postgresql://host.docker.internal:32769/Corda_Examiner",
+                "dataSourceProperties.dataSource.user"    : 'postgres',
+                "dataSourceProperties.dataSource.password": 'postgrespw',
+                "jarDirs"                                 : ['${ rootProject.projectDir }/drivers']
+        ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
     node {
@@ -164,6 +178,13 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
             address("localhost:10015")
             adminAddress("localhost:10055")
         }
+        extraConfig = [
+                "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
+                "dataSourceProperties.dataSource.url"     : "jdbc:postgresql://host.docker.internal:32769/Varatharaj",
+                "dataSourceProperties.dataSource.user"    : 'postgres',
+                "dataSourceProperties.dataSource.password": 'postgres',
+                "jarDirs"                                 : ['${ rootProject.projectDir }/drivers']
+        ]
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
     }
 }
@@ -175,7 +196,7 @@ task prepareDockerNodesWithPostgres(type: net.corda.plugins.Dockerform, dependsO
      * the notion of cordapps. In production, Notary does not need cordapps as well. This is just a short cut to load
      * the Corda network bootstrapper.
      */
-    dockerImage="corda/community:4.9.3-zulu-openjdk8"
+    dockerImage="corda/corda-enterprise:4.9.2-zulu-openjdk8-alpine"
 
     nodeDefaults {
         projectCordapp {
