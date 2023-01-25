@@ -8,12 +8,12 @@ nodes:
       examinaar:
         password: password
         permissions: [ "ALL" ]
-  Peter:
-    x500: "O=Peter, L=New York, C=US"
+  Varatharaj:
+    x500: "O=Varatharaj, L=New York, C=US"
     users:
       user1:
         password: test
-      peteer:
+      varathaaa:
         password: password
         permissions: [ "ALL" ]
   Lokesh:

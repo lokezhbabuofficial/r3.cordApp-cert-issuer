@@ -27,11 +27,11 @@
 - Using the port noted from the network status visit `https://localhost:<port>/api/v1/swagger`
 - Login using the button on the top right usernames and passwords are as follows:
 
-  | Nodes    | Username  | Password |
-  | -------- | --------- | -------- |
-  | Examinar | examinaar | password |
-  | Peter    | peteer    | password |
-  | Lokesh   | lokezh    | password |
+  | Nodes      | Username  | Password |
+  | ---------- | --------- | -------- |
+  | Examinar   | examinaar | password |
+  | Varatharaj | varathaaa | password |
+  | Lokesh     | lokezh    | password |
 
 ## Case 1:
 
@@ -93,7 +93,7 @@
 		"clientId": "<client-id>",
 		"flowName": "com.tutorial.BulkStudentIssueCourseCertificationFlowInitator",
 		"parameters": {
-			"parametersInJson": "[{\"participant\":\"O=Peter, L=New York, C=US\",\"score\":85},{\"participant\":\"O=Lokesh, L=Delhi, C=IN\",\"score\":95}]"
+			"parametersInJson": "[{\"participant\":\"O=Varatharaj, L=New York, C=US\",\"score\":85},{\"participant\":\"O=Lokesh, L=Delhi, C=IN\",\"score\":95}]"
 		}
 	}
 }
