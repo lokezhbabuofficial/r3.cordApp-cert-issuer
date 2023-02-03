@@ -2,7 +2,7 @@
 <Configuration status="info">
 
     <Properties>
-        <Property name="log-path">logs</Property>
+        <Property name="log-path">/tmp/logs</Property>
         <Property name="log-name">node-${hostName}</Property>
         <Property name="archive">${log-path}/archive</Property>
     </Properties>
