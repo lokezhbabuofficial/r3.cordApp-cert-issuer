@@ -44,23 +44,23 @@ task runTestClient(type: JavaExec, dependsOn: assemble) {
 task runCordaExaminarClient(type: JavaExec, dependsOn: assemble) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.samples.example.webserver.Starter'
-    args '--server.port=50005', '--config.rpc.host=localhost', '--config.rpc.port=10207', '--config.rpc.username=user1', '--config.rpc.password=test'
+    args '--server.port=50005', '--config.rpc.host=localhost', '--config.rpc.port=10012', '--config.rpc.username=user1', '--config.rpc.password=test'
 }
 
 task runVaratharajClient(type: JavaExec, dependsOn: assemble) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.samples.example.webserver.Starter'
-    args '--server.port=50006', '--config.rpc.host=localhost', '--config.rpc.port=10210', '--config.rpc.username=user1', '--config.rpc.password=test'
+    args '--server.port=50006', '--config.rpc.host=localhost', '--config.rpc.port=10015', '--config.rpc.username=user1', '--config.rpc.password=test'
 }
 
 task runLokeshClient(type: JavaExec, dependsOn: assemble) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.samples.example.webserver.Starter'
-    args '--server.port=50006', '--config.rpc.host=localhost', '--config.rpc.port=10204', '--config.rpc.username=user1', '--config.rpc.password=test'
+    args '--server.port=50007', '--config.rpc.host=localhost', '--config.rpc.port=10009', '--config.rpc.username=user1', '--config.rpc.password=test'
 }
 
 task runNotaryClient(type: JavaExec, dependsOn: assemble) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'net.corda.samples.example.webserver.Starter'
-    args '--server.port=50006', '--config.rpc.host=localhost', '--config.rpc.port=10201', '--config.rpc.username=user1', '--config.rpc.password=test'
+    args '--server.port=50008', '--config.rpc.host=localhost', '--config.rpc.port=10003', '--config.rpc.username=user1', '--config.rpc.password=test'
 }
