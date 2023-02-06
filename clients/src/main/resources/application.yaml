@@ -1,0 +1,10 @@
+Lokesh:
+  host: localhost:10009
+
+Varatharaj:
+  host: localhost:10015
+
+CordaExaminar:
+  host: localhost:10012
+
+server.port: 8080
