@@ -87,28 +87,6 @@ dependencies {
 
 }
 
-cordapp {
-    targetPlatformVersion 11
-    minimumPlatformVersion 5
-    contract {
-        name "Certificate Contracts"
-        vendor "Relevantz"
-        licence "Relevantz Licence"
-        versionId 1
-    }
-}
-
-cordapp {
-    targetPlatformVersion 11
-    minimumPlatformVersion 5
-    workflow {
-        name "Certificate Workflow"
-        vendor "Relevantz"
-        licence "Relevantz Licence"
-        versionId 1
-    }
-}
-
 //Task to deploy the nodes in order to bootstrap a network
 task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
 
@@ -137,17 +115,19 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         notary = [validating : false]
         p2pPort 10002
         rpcSettings {
-            address("localhost:10003")
-            adminAddress("localhost:10043")
+            address("0.0.0.0:10003")
+            adminAddress("0.0.0.0:10043")
         }
+        sshdPort 2223
     }
     node {
         name "O=Lokesh,L=Chennai,C=IN"
         p2pPort 10008
         rpcSettings {
-            address("localhost:10009")
-            adminAddress("localhost:10049")
+            address("0.0.0.0:10009")
+            adminAddress("0.0.0.0:10049")
         }
+        sshdPort 2224
         // extraConfig = [
         //         "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
         //         "dataSourceProperties.dataSource.url"     : "jdbc:postgresql://corda-aws.cm1kd9srlmmm.us-east-1.rds.amazonaws.com:5432/Lokesh",
@@ -160,8 +140,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         name "O=CordaExaminar,L=Tamilnadu,C=IN"
         p2pPort 10011
         rpcSettings {
-            address("localhost:10012")
-            adminAddress("localhost:10052")
+            address("0.0.0.0:10012")
+            adminAddress("0.0.0.0:10052")
         }
         // extraConfig = [
         //         "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
@@ -175,8 +155,8 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         name "O=Varatharaj,L=New York,C=US"
         p2pPort 10014
         rpcSettings {
-            address("localhost:10015")
-            adminAddress("localhost:10055")
+            address("0.0.0.0:10015")
+            adminAddress("0.0.0.0:10055")
         }
         // extraConfig = [
         //         "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
@@ -187,67 +167,6 @@ task deployNodes(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
         // ]
     }
 }
-
-apply from: 'postgres.gradle'
-task prepareDockerNodesWithPostgres(type: net.corda.plugins.Dockerform, dependsOn: ['jar',  'generateInitScripts']) {
-    /* This property will load the CorDapps to each of the node by default, including the Notary. You can find them
-     * in the cordapps folder of the node at build/nodes/Notary/cordapps. However, the notary doesn't really understand
-     * the notion of cordapps. In production, Notary does not need cordapps as well. This is just a short cut to load
-     * the Corda network bootstrapper.
-     */
-    dockerImage="corda/corda-enterprise:4.9.2-zulu-openjdk8-alpine"
-
-    nodeDefaults {
-        projectCordapp {
-            deploy = false
-        }
-        cordapp project(':contracts')
-        cordapp project(':workflows')
-        runSchemaMigration = false //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
-        //problems for developers who are not familiar with Corda. If you are not using custom schemas, you can change
-        //it to false for quicker project compiling time.
-        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
-    }
-    node {
-        name "O=Notary,L=London,C=GB"
-        notary = [validating : false]
-        p2pPort 10200
-        rpcSettings {
-            address("localhost:10201")
-            adminAddress("localhost:10202")
-        }
-    }
-    node {
-        name "O=Lokesh,L=Chennai,C=IN"
-        p2pPort 10203
-        rpcSettings {
-            address("localhost:10204")
-            adminAddress("localhost:10205")
-        }
-        sshdPort 2222
-    }
-    node {
-        name "O=CordaExaminar,L=Tamilnadu,C=IN"
-        p2pPort 10206
-        rpcSettings {
-            address("localhost:10207")
-            adminAddress("localhost:10208")
-        }
-        sshdPort 2223
-    }
-    node {
-        name "O=Varatharaj,L=Georgia,C=US"
-        p2pPort 10209
-        rpcSettings {
-            address("localhost:10210")
-            adminAddress("localhost:10211")
-        }
-        sshdPort 2224
-    }
-
-    dockerConfig = postgres
-}
-
 
 task prepareDockerNodes(type: net.corda.plugins.Dockerform, dependsOn: ['jar']) {
     /* This property will load the CorDapps to each of the node by default, including the Notary. You can find them
@@ -263,7 +182,7 @@ task prepareDockerNodes(type: net.corda.plugins.Dockerform, dependsOn: ['jar']) 
         }
         cordapp project(':contracts')
         cordapp project(':workflows')
-        runSchemaMigration = false //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
+        runSchemaMigration = true //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
         //problems for developers who are not familiar with Corda. If you are not using custom schemas, you can change
         //it to false for quicker project compiling time.
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
@@ -273,16 +192,16 @@ task prepareDockerNodes(type: net.corda.plugins.Dockerform, dependsOn: ['jar']) 
         notary = [validating : false]
         p2pPort 10200
         rpcSettings {
-            address("localhost:10201")
-            adminAddress("localhost:10202")
+            address("0.0.0.0:10201")
+            adminAddress("0.0.0.0:10202")
         }
     }
     node {
         name "O=Lokesh,L=Chennai,C=IN"
         p2pPort 10203
         rpcSettings {
-            address("localhost:10204")
-            adminAddress("localhost:10205")
+            address("0.0.0.0:10204")
+            adminAddress("0.0.0.0:10205")
         }
         sshdPort 2222
     }
@@ -290,8 +209,8 @@ task prepareDockerNodes(type: net.corda.plugins.Dockerform, dependsOn: ['jar']) 
         name "O=CordaExaminar,L=Tamilnadu,C=IN"
         p2pPort 10206
         rpcSettings {
-            address("localhost:10207")
-            adminAddress("localhost:10208")
+            address("0.0.0.0:10207")
+            adminAddress("0.0.0.0:10208")
         }
         sshdPort 2223
     }
@@ -299,8 +218,8 @@ task prepareDockerNodes(type: net.corda.plugins.Dockerform, dependsOn: ['jar']) 
         name "O=Varatharaj,L=Georgia,C=US"
         p2pPort 10209
         rpcSettings {
-            address("localhost:10210")
-            adminAddress("localhost:10211")
+            address("0.0.0.0:10210")
+            adminAddress("0.0.0.0:10211")
         }
         sshdPort 2224
     }
@@ -320,7 +239,7 @@ task prepareDockerNodesVM1(type: net.corda.plugins.Dockerform, dependsOn: ['jar'
         }
         cordapp project(':contracts')
         cordapp project(':workflows')
-        runSchemaMigration = false //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
+        runSchemaMigration = true //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
         //problems for developers who are not familiar with Corda. If you are not using custom schemas, you can change
         //it to false for quicker project compiling time.
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
@@ -330,16 +249,16 @@ task prepareDockerNodesVM1(type: net.corda.plugins.Dockerform, dependsOn: ['jar'
         notary = [validating : false]
         p2pPort 10200
         rpcSettings {
-            address("localhost:10201")
-            adminAddress("localhost:10202")
+            address("0.0.0.0:10201")
+            adminAddress("0.0.0.0:10202")
         }
     }
     node {
         name "O=Lokesh,L=Chennai,C=IN"
         p2pPort 10203
         rpcSettings {
-            address("localhost:10204")
-            adminAddress("localhost:10205")
+            address("0.0.0.0:10204")
+            adminAddress("0.0.0.0:10205")
         }
         sshdPort 2222
     }
@@ -359,7 +278,7 @@ task prepareDockerNodesVM2(type: net.corda.plugins.Dockerform, dependsOn: ['jar'
         }
         cordapp project(':contracts')
         cordapp project(':workflows')
-        runSchemaMigration = false //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
+        runSchemaMigration = true //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
         //problems for developers who are not familiar with Corda. If you are not using custom schemas, you can change
         //it to false for quicker project compiling time.
         rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
@@ -368,8 +287,8 @@ task prepareDockerNodesVM2(type: net.corda.plugins.Dockerform, dependsOn: ['jar'
         name "O=CordaExaminar,L=Tamilnadu,C=IN"
         p2pPort 10206
         rpcSettings {
-            address("localhost:10207")
-            adminAddress("localhost:10208")
+            address("0.0.0.0:10207")
+            adminAddress("0.0.0.0:10208")
         }
         sshdPort 2223
     }
@@ -377,115 +296,9 @@ task prepareDockerNodesVM2(type: net.corda.plugins.Dockerform, dependsOn: ['jar'
         name "O=Varatharaj,L=Georgia,C=US"
         p2pPort 10209
         rpcSettings {
-            address("localhost:10210")
-            adminAddress("localhost:10211")
+            address("0.0.0.0:10210")
+            adminAddress("0.0.0.0:10211")
         }
         sshdPort 2224
-    }
-}
-
-
-task deployNodesVM1(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
-
-    logger.quiet("SDK version: {}", JavaVersion.current())
-    logger.quiet("JAVA HOME {}", System.getProperty("java.home"))
-
-    /* This property will load the CorDapps to each of the node by default, including the Notary. You can find them
-     * in the cordapps folder of the node at build/nodes/Notary/cordapps. However, the notary doesn't really understand
-     * the notion of cordapps. In production, Notary does not need cordapps as well. This is just a short cut to load
-     * the Corda network bootstrapper.
-     */
-    nodeDefaults {
-        projectCordapp {
-            deploy = false
-        }
-        cordapp project(':contracts')
-        cordapp project(':workflows')
-        runSchemaMigration = true //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
-        //problems for developers who are not familiar with Corda. If you are not using custom schemas, you can change
-        //it to false for quicker project compiling time.
-        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
-
-    }
-    node {
-        name "O=Notary,L=London,C=GB"
-        notary = [validating : false]
-        p2pPort 10002
-        rpcSettings {
-            address("localhost:10003")
-            adminAddress("localhost:10043")
-        }
-    }
-    node {
-        name "O=CordaExaminar,L=Tamilnadu,C=IN"
-        p2pPort 10011
-        rpcSettings {
-            address("localhost:10012")
-            adminAddress("localhost:10052")
-        }
-        // extraConfig = [
-        //         "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
-        //         "dataSourceProperties.dataSource.url"     : "jdbc:postgresql://corda-aws.cm1kd9srlmmm.us-east-1.rds.amazonaws.com:5432/Corda_Examiner",
-        //         "dataSourceProperties.dataSource.user"    : 'postgres_corda',
-        //         "dataSourceProperties.dataSource.password": 'postgrespw',
-        //         "jarDirs"                                 : ['${ rootProject.projectDir }/drivers']
-        // ]
-    }
-}
-
-
-task deployNodesVM2(type: net.corda.plugins.Cordform, dependsOn: ['jar']) {
-
-    logger.quiet("SDK version: {}", JavaVersion.current())
-    logger.quiet("JAVA HOME {}", System.getProperty("java.home"))
-
-    /* This property will load the CorDapps to each of the node by default, including the Notary. You can find them
-     * in the cordapps folder of the node at build/nodes/Notary/cordapps. However, the notary doesn't really understand
-     * the notion of cordapps. In production, Notary does not need cordapps as well. This is just a short cut to load
-     * the Corda network bootstrapper.
-     */
-    nodeDefaults {
-        projectCordapp {
-            deploy = false
-        }
-        cordapp project(':contracts')
-        cordapp project(':workflows')
-        runSchemaMigration = true //This configuration is for any CorDapps with custom schema, We will leave this as true to avoid
-        //problems for developers who are not familiar with Corda. If you are not using custom schemas, you can change
-        //it to false for quicker project compiling time.
-        rpcUsers = [[ user: "user1", "password": "test", "permissions": ["ALL"]]]
-
-    }
-
-    node {
-        name "O=Lokesh,L=Chennai,C=IN"
-        p2pPort 10008
-        rpcSettings {
-            address("localhost:10009")
-            adminAddress("localhost:10049")
-        }
-        // extraConfig = [
-        //         "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
-        //         "dataSourceProperties.dataSource.url"     : "jdbc:postgresql://corda-aws.cm1kd9srlmmm.us-east-1.rds.amazonaws.com:5432/Lokesh",
-        //         "dataSourceProperties.dataSource.user"    : 'postgres_corda',
-        //         "dataSourceProperties.dataSource.password": 'postgrespw',
-        //         "jarDirs"                                 : ['${ rootProject.projectDir }/drivers']
-        // ]
-    }
-
-    node {
-        name "O=Varatharaj,L=New York,C=US"
-        p2pPort 10014
-        rpcSettings {
-            address("localhost:10015")
-            adminAddress("localhost:10055")
-        }
-        // extraConfig = [
-        //         "dataSourceProperties.dataSourceClassName": "org.postgresql.ds.PGSimpleDataSource",
-        //         "dataSourceProperties.dataSource.url"     : "jdbc:postgresql://corda-aws.cm1kd9srlmmm.us-east-1.rds.amazonaws.com:5432/Varatharaj",
-        //         "dataSourceProperties.dataSource.user"    : 'postgres_corda',
-        //         "dataSourceProperties.dataSource.password": 'postgrespw',
-        //         "jarDirs"                                 : ['${ rootProject.projectDir }/drivers']
-        // ]
     }
 }
