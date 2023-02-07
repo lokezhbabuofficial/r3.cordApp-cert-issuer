@@ -28,7 +28,7 @@ import net.corda.core.transactions.SignedTransaction;
 
 @RestController
 @RequestMapping("/api/v1")
-@Api(value = "V1Controller", description = "R3.Corda-POC Issue Cert - Use Case 1", tags = "V1")
+@Api(value = "V1Controller", description = "R3.Corda-POC Issue Cert - Use Case 1&2", tags = "V1")
 public class V1Controller {
 
   @Autowired

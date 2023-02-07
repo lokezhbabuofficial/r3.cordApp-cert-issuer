@@ -64,12 +64,12 @@ public class BaseController {
     return nodeInfo.getLegalIdentities().get(0).getName().getOrganisation().equals("Network Map Service");
   }
 
-  @GetMapping(value = "/active-user",produces = APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/active-user", produces = APPLICATION_JSON_VALUE)
   @ApiOperation(value = "Active User")
-  private ResponseEntity<HashMap<String, String>> whoami(){
-      HashMap<String, String> myMap = new HashMap<>();
-      myMap.put("me", activeUser.nodeInfo().getLegalIdentities().get(0).getName().toString());
-      return ResponseEntity.status(HttpStatus.OK).body(myMap);
+  private ResponseEntity<HashMap<String, String>> whoami() {
+    HashMap<String, String> myMap = new HashMap<>();
+    myMap.put("me", activeUser.nodeInfo().getLegalIdentities().get(0).getName().toString());
+    return ResponseEntity.status(HttpStatus.OK).body(myMap);
   }
 
   @PostMapping(value = "/switch-user/{user}")
@@ -110,27 +110,32 @@ public class BaseController {
   }
 
   @GetMapping(value = "/servertime", produces = TEXT_PLAIN_VALUE)
-    private String serverTime() {
-        return (LocalDateTime.ofInstant(activeUser.currentNodeTime(), ZoneId.of("UTC"))).toString();
-    }
+  @ApiOperation(value = "Server Time")
+  private String serverTime() {
+    return (LocalDateTime.ofInstant(activeUser.currentNodeTime(), ZoneId.of("UTC"))).toString();
+  }
 
-    @GetMapping(value = "/addresses", produces = TEXT_PLAIN_VALUE)
-    private String addresses() {
-        return activeUser.nodeInfo().getAddresses().toString();
-    }
+  @GetMapping(value = "/addresses", produces = TEXT_PLAIN_VALUE)
+  @ApiOperation(value = "Address")
+  private String addresses() {
+    return activeUser.nodeInfo().getAddresses().toString();
+  }
 
-    @GetMapping(value = "/identities", produces = TEXT_PLAIN_VALUE)
-    private String identities() {
-        return activeUser.nodeInfo().getLegalIdentities().toString();
-    }
+  @GetMapping(value = "/identities", produces = TEXT_PLAIN_VALUE)
+  @ApiOperation(value = "Identities")
+  private String identities() {
+    return activeUser.nodeInfo().getLegalIdentities().toString();
+  }
 
-    @GetMapping(value = "/platformversion", produces = TEXT_PLAIN_VALUE)
-    private String platformVersion() {
-        return Integer.toString(activeUser.nodeInfo().getPlatformVersion());
-    }
+  @GetMapping(value = "/platformversion", produces = TEXT_PLAIN_VALUE)
+  @ApiOperation(value = "Platform version")
+  private String platformVersion() {
+    return Integer.toString(activeUser.nodeInfo().getPlatformVersion());
+  }
 
-    @GetMapping(value = "/notaries", produces = TEXT_PLAIN_VALUE)
-    private String notaries() {
-        return activeUser.notaryIdentities().toString();
-    }
+  @GetMapping(value = "/notaries", produces = TEXT_PLAIN_VALUE)
+  @ApiOperation(value = "Notary List")
+  private String notaries() {
+    return activeUser.notaryIdentities().toString();
+  }
 }
