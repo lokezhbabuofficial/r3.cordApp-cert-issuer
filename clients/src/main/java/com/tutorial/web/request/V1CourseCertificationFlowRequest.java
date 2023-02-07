@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class V1CourseCertificationFlowRequest {
 
-  @ApiModelProperty(notes = "Name of the Examinar", name = "party", required = true, value = "O=CordaExaminar,L=Northern Cape,C=ZA")
+  @ApiModelProperty(notes = "Name of the Examinar", name = "party", required = true, value = "O=CordaExaminar,L=New York,C=US")
   private String party;
 
   @ApiModelProperty(notes = "Course Score", name = "courseScore", required = true, value = "87")

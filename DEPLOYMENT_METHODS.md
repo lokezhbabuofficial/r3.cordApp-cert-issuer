@@ -20,4 +20,4 @@
 
 ## Bulk Issue certificate ( via Corda Examiner Node )
 
-``` flow start BulkStudentIssueCourseCertificationFlow$BulkStudentIssueCourseCertificationFlowInitiator students: ["O=Lokesh,L=Chennai,C=IN", "O=Varatharaj,L=New Jersey,C=US"], studentScores: [80, 85] ```
+``` flow start BulkStudentIssueCourseCertificationFlow$BulkStudentIssueCourseCertificationFlowInitiator students: ["O=Lokesh,L=Chennai,C=IN", "O=Varatharaj,L=Delhi,C=IN"], studentScores: [80, 85] ```
