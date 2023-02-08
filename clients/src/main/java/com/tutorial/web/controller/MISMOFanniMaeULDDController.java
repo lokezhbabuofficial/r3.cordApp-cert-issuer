@@ -24,7 +24,7 @@ import net.corda.core.contracts.StateAndRef;
 import net.corda.core.transactions.SignedTransaction;
 
 @RestController
-@RequestMapping("/api/finnimae/loan")
+@RequestMapping("/api/fannimae/loan")
 @Api(value = "MISMOFanniMaeULDDController", description = "R3.Corda-POC Issue Cert - MISMO Loan Distribute", tags = "MISMO Fannie Mae ULDD")
 public class MISMOFanniMaeULDDController {
 
