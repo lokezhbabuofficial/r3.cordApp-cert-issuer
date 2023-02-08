@@ -59,8 +59,8 @@ public class SubscribeToCourseFlow {
 			}
 			
 			CourseSubscriptionState courseSubscriptionState = new CourseSubscriptionState(subscriber, getOurIdentity(),
-					new UniqueIdentifier(), new LinearPointer<>(courseId, CourseState.class), instantNow, instantNow.plus(30,
-							ChronoUnit.SECONDS), true);
+					new UniqueIdentifier(), new LinearPointer<>(courseId, CourseState.class), instantNow, instantNow.plus(2,
+							ChronoUnit.MINUTES), true);
 
 			TransactionBuilder txBuilder = new TransactionBuilder(notary).addOutputState(courseSubscriptionState).addCommand(
 					new CourseSubscriptionContract.Commands.Issue(),

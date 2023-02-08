@@ -15,7 +15,7 @@
 ```json
 {
 	"courseScore": 90,
-	"party": "O=CordaExaminar,L=Tamilnadu,C=IN"
+	"party": "O=CordaExaminar,L=New York,C=US"
 }
 ```
 
@@ -29,7 +29,7 @@
 	},
 	{
 		"courseScore": 98,
-		"party": "O=Varatharaj,L=New York,C=US"
+		"party": "O=Varatharaj,L=Delhi,C=IN"
 	}
 ]
 ```

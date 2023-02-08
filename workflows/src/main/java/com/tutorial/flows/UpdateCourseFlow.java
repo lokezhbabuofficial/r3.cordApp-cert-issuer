@@ -31,7 +31,6 @@ import net.corda.core.transactions.TransactionBuilder;
 
 public class UpdateCourseFlow {
 	@InitiatingFlow
-	@StartableByRPC
 	public static class UpdateCourseFlowInitator extends FlowLogic<SignedTransaction> {
 		// private Party examinar;
 		private UniqueIdentifier courseId;
