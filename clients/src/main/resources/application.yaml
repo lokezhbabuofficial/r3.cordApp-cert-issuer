@@ -1,10 +1,10 @@
 Lokesh:
-  host: localhost:10009
+  host: 3.133.202.115:10204
 
 Varatharaj:
-  host: localhost:10015
+  host: 3.133.202.115:10210
 
 CordaExaminar:
-  host: localhost:10012
+  host: 3.133.202.115:10207
 
 server.port: 8080
