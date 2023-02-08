@@ -65,7 +65,7 @@ public class V2Controller {
   @ApiOperation(httpMethod = "POST", position = 1, value = "Examinar creating the subscription for students", response = SignedTransaction.class)
   public ResponseEntity<APIResponse<SignedTransaction>> courseSubscriptionFlow(
       @RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody V2CreateSubscriptionRequest request) {
-    CordaX500Name userCordaX500Name = CordaX500Name.parse(request.getExaminar());
+    CordaX500Name userCordaX500Name = CordaX500Name.parse(request.getStudent());
     Party party = baseController.activeUser.wellKnownPartyFromX500Name(userCordaX500Name);
 
     UniqueIdentifier courseId = new UniqueIdentifier(null, UUID.fromString(request.getCourseId()));
@@ -83,7 +83,7 @@ public class V2Controller {
     }
   }
 
-  @PostMapping(value = "/isue-cretification")
+  @PostMapping(value = "/cretification")
   @ApiOperation(httpMethod = "POST", position = 1, value = "Students creating the certification by their subscription", response = SignedTransaction.class)
   public ResponseEntity<APIResponse<SignedTransaction>> courseCertifiactionFlow(
       @RequestBody @io.swagger.v3.oas.annotations.parameters.RequestBody V2CourseCertificationRequest request) {
@@ -96,7 +96,7 @@ public class V2Controller {
       SignedTransaction result = baseController.activeUser
           .startTrackedFlowDynamic(
               CourseSubscriptionCertificationFlow.CourseSubscriptionCertificationFlowInitiator.class, party,
-              request.getCourseScore(), subscriptionId)
+              subscriptionId, request.getCourseScore())
           .getReturnValue().get();
       return ResponseEntity.status(HttpStatus.OK).body(APIResponse.success(result));
     } catch (Exception e) {

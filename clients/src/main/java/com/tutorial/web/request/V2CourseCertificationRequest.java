@@ -23,7 +23,7 @@ public class V2CourseCertificationRequest {
     this.subscriptionId = subscriptionId;
   }
 
-  public int getCourseScore() {
+  public Integer getCourseScore() {
     return courseScore;
   }
 
