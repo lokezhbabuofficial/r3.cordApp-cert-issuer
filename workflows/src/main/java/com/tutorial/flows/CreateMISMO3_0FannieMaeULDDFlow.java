@@ -22,12 +22,15 @@ public class CreateMISMO3_0FannieMaeULDDFlow {
   @InitiatingFlow
   @StartableByRPC
   public static class Initator extends FlowLogic<SignedTransaction> {
-    private MISMO3_0FannieMaeULDDState.DealSet dealSet;
-    private MISMO3_0FannieMaeULDDState.Parties parties;
+    // private MISMO3_0FannieMaeULDDState.DealSet dealSet;
+    // private MISMO3_0FannieMaeULDDState.Parties parties;
 
-    public Initator(MISMO3_0FannieMaeULDDState.DealSet dealSet, MISMO3_0FannieMaeULDDState.Parties parties) {
-      this.dealSet = dealSet;
-      this.parties = parties;
+    private String loanString;
+
+    public Initator(String loanString) {
+      // this.dealSet = dealSet;
+      // this.parties = parties;
+      this.loanString = loanString;
     }
 
     @Override
@@ -39,8 +42,12 @@ public class CreateMISMO3_0FannieMaeULDDFlow {
 
       UniqueIdentifier uniqueID = new UniqueIdentifier();
 
-      MISMO3_0FannieMaeULDDState.DealSets dealSetsState = new MISMO3_0FannieMaeULDDState.DealSets(dealSet, parties,
-          uniqueID, me);
+      MISMO3_0FannieMaeULDDState.DealSets dealSetsState = new MISMO3_0FannieMaeULDDState.DealSets(
+          uniqueID, me, loanString);
+
+      // System.out
+      // .println(dealSetsState.getDealSet().getDeals().getDeal().getCollaterals().getCollateral().getProperties()
+      // .getProperty().getAddress().getAddressLineText());
 
       TransactionBuilder txBuilder = new TransactionBuilder(notary).addOutputState(dealSetsState).addCommand(
           new MISMO3_0FannieMaeULDDContract.Commands.Create(),

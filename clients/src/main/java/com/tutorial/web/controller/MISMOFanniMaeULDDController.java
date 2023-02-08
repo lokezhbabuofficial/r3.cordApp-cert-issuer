@@ -40,7 +40,7 @@ public class MISMOFanniMaeULDDController {
     try {
       // We block and waits for the flow to return.
       SignedTransaction result = baseController.activeUser
-          .startTrackedFlowDynamic(CreateMISMO3_0FannieMaeULDDFlow.Initator.class, request.getDealSet(), request.getParties())
+          .startTrackedFlowDynamic(CreateMISMO3_0FannieMaeULDDFlow.Initator.class, request.getLoanString())
           .getReturnValue().get();
       return ResponseEntity.status(HttpStatus.OK).body(APIResponse.success(result));
     } catch (Exception e) {
