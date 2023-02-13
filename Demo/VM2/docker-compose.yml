@@ -1,0 +1,34 @@
+version: '3'
+services:
+  cordaexaminar:
+    volumes:
+    - ./CordaExaminar/node.conf:/etc/corda/node.conf
+    - ./CordaExaminar/certificates:/opt/corda/certificates
+    - ./CordaExaminar/logs:/opt/corda/logs
+    - ./CordaExaminar/persistence:/opt/corda/persistence
+    - ./Shared/cordapps:/opt/corda/cordapps
+    - ./Shared/network-parameters:/opt/corda/network-parameters
+    - ./Shared/additional-node-infos:/opt/corda/additional-node-infos
+    - ./CordaExaminar//drivers:/opt/corda/drivers
+    environment:
+    - ACCEPT_LICENSE=${ACCEPT_LICENSE}
+    ports:
+    - "10207:10207"
+    - "2223:2223"
+    image: corda/community:4.9.3-zulu-openjdk8
+  varatharaj:
+    volumes:
+    - ./Varatharaj/node.conf:/etc/corda/node.conf
+    - ./Varatharaj/certificates:/opt/corda/certificates
+    - ./Varatharaj/logs:/opt/corda/logs
+    - ./Varatharaj/persistence:/opt/corda/persistence
+    - ./Shared/cordapps:/opt/corda/cordapps
+    - ./Shared/network-parameters:/opt/corda/network-parameters
+    - ./Shared/additional-node-infos:/opt/corda/additional-node-infos
+    - ./Varatharaj//drivers:/opt/corda/drivers
+    environment:
+    - ACCEPT_LICENSE=${ACCEPT_LICENSE}
+    ports:
+    - "10210:10210"
+    - "2224:2224"
+    image: corda/community:4.9.3-zulu-openjdk8

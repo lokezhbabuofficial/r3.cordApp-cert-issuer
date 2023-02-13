@@ -1,0 +1,34 @@
+version: '3'
+services:
+  notary:
+    volumes:
+    - ./Notary/node.conf:/etc/corda/node.conf
+    - ./Notary/certificates:/opt/corda/certificates
+    - ./Notary/logs:/opt/corda/logs
+    - ./Notary/persistence:/opt/corda/persistence
+    - ./Shared/cordapps:/opt/corda/cordapps
+    - ./Shared/network-parameters:/opt/corda/network-parameters
+    - ./Shared/additional-node-infos:/opt/corda/additional-node-infos
+    - ./Notary//drivers:/opt/corda/drivers
+    environment:
+    - ACCEPT_LICENSE=${ACCEPT_LICENSE}
+    ports:
+    - "10201:10201"
+    - "22022:22022"
+    image: corda/community:4.9.3-zulu-openjdk8
+  lokesh:
+    volumes:
+    - ./Lokesh/node.conf:/etc/corda/node.conf
+    - ./Lokesh/certificates:/opt/corda/certificates
+    - ./Lokesh/logs:/opt/corda/logs
+    - ./Lokesh/persistence:/opt/corda/persistence
+    - ./Shared/cordapps:/opt/corda/cordapps
+    - ./Shared/network-parameters:/opt/corda/network-parameters
+    - ./Shared/additional-node-infos:/opt/corda/additional-node-infos
+    - ./Lokesh//drivers:/opt/corda/drivers
+    environment:
+    - ACCEPT_LICENSE=${ACCEPT_LICENSE}
+    ports:
+    - "10204:10204"
+    - "2222:2222"
+    image: corda/community:4.9.3-zulu-openjdk8

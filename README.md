@@ -27,67 +27,12 @@ On `CordaExaminar` Node execute bellow for positive flow
 flow start BulkStudentIssueCourseCertificationFlow$BulkStudentIssueCourseCertificationFlowInitiator students: ["O=Lokesh,L=Delhi,C=IN", "O=Peter,L=New York,C=US"], studentScores: [80, 85]
 ```
 
-## Case 3: **!!(TODO)!!**
+## Case 3:
 
 ***Trying to consume and input state and provide a new output state (to see notary in action) and using LinearPointer, StaticPointers***
 
-IDEA
-```
-State
-	CourseState
-		courseDesc: string,
-		courseId: LinearId,
-		coursePassScore: int
-		
-	CourseSubscriptionState
-		courseSubscriptionId: LinearId
-		courseId: LinerPointer<CourseState>
-		subscriptionStartDate: Instant
-		subscriptionEndDate: Instant
-		
-	CourseCertificationState
-		courseSubscriptionId: LinearId
-		issuer: Party
-		owner: Party
-	
-Contract
-	CourseContract
-	CourseSubscriptionContract
-	CourseCertificationContract
-	
-Flow
-	CreateAndIssueNewCourseFlow
-		Issue CourseId
-	UpdateCourseFlow
-		Consume CourseId input and produce new output with CourseId
-	SubscribeToCourseFlow
-		Associate CourseId to create CourseSubscriptionState and assign the state to student (Use Linear or StatePointer, )
-	IssueSubscriptionCourseCertificationFlow
-		Consume SubscriptionId to issue CourseCertificationState
-```
-
-## Docker Deployment ( Windows )
-
-## Prerequisite:
-
-- Docker Desktop
-
-## To clean and deploy nodes locally
-
-``` gradlew clean prepareDockerNodes ```
-
-## To start / run the flow
-
-## Prerequisite:
-
-- Putty ( To connect the nodes via SSH PORT )
-- Node Explorer ( To connect with the node and to do transaction )
-## Issue certificate
-
-``` flow start CourseCertificationFlow$CourseCertificationFlowInitiator examiner: "O=CordaExaminar,L=Tamilnadu,C=IN", score: 50 ```
-
-## Bulk Issue certificate ( via Corda Examiner Node )
-
-``` flow start BulkStudentIssueCourseCertificationFlow$BulkStudentIssueCourseCertificationFlowInitiator students: ["O=Lokesh,L=Chennai,C=IN", "O=Varatharaj,L=Georgia,C=US"], studentScores: [80, 85] ```
+* CordaExaminar -> Creates a `CourseState` and distribute to all the nodes excepts himself and notary
+* CordaExaminar -> Creates a new `CourseSubscriptionState` with implementing `SchedulableState` and provide a default expiration date and issue to student/subscriber
+* Student -> Request for `SubscriptionCourseCertificationState` by consuming the `CourseSubscriptionState` flow provides `SubscriptionCourseCertificationState` before the subscription expired
 
 

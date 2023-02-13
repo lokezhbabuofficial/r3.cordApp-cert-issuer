@@ -1,0 +1,527 @@
+{
+	"dealSets": {
+		"dealSet": {
+			"deals": {
+				"deal": {
+					"collaterals": {
+						"collateral": {
+							"properties": {
+								"property": {
+									"address": {
+										"addressLineText": "123 Main Street",
+										"cityName": "Anytown",
+										"postalCode": 20191,
+										"stateCode": "VA"
+									},
+									"floodDetermination": {
+										"floodDeterminationDetail": {
+											"specialFloodHazardAreaIndicator": false
+										}
+									},
+									"project": {
+										"projectDetail": {
+											"projectClassificationIdentifier": "G",
+											"pudindicator": false
+										}
+									},
+									"propertyDetail": {
+										"attachmentType": "Detached",
+										"constructionMethodType": "SiteBuilt",
+										"financedUnitCount": 1,
+										"propertyEstateType": "FeeSimple",
+										"propertyFloodInsuranceIndicator": false,
+										"propertyStructureBuiltYear": 1998,
+										"propertyUsageType": "PrimaryResidence"
+									},
+									"propertyValuations": {
+										"propertyValuation": {
+											"propertyValuationDetail": {
+												"appraisalIdentifier": 1234567890,
+												"propertyValuationAmount": 300000,
+												"propertyValuationEffectiveDate": "2017-01-01",
+												"propertyValuationFormType": "UniformResidentialAppraisalReport",
+												"propertyValuationMethodType": "FullAppraisal"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"loans": {
+						"combinedLtvs": {
+							"combinedLtv": {
+								"combinedLtvratioPercent": 80,
+								"homeEquityCombinedLtvratioPercent": 95
+							}
+						},
+						"loan": [
+							{
+								"amortization": {
+									"amortizationRule": {
+										"loanAmortizationPeriodCount": 360,
+										"loanAmortizationPeriodType": "Month",
+										"loanAmortizationType": "Fixed"
+									}
+								},
+								"formSpecificContents": {
+									"formSpecificContent": {
+										"urla": {
+											"urlaDetail": {
+												"borrowerPaidDiscountPointsTotalAmount": 0,
+												"purchasePriceAmount": 300000
+											}
+										}
+									}
+								},
+								"hmdaLoan": {
+									"hmdaHoepaloanStatusIndicator": false,
+									"hmdarateSpreadPercent": 1.600000000000000088817841970012523233890533447265625
+								},
+								"interestCalculation": {
+									"interestCalculationRules": {
+										"interestCalculationRule": {
+											"interestCalculationPeriodType": "Month",
+											"interestCalculationType": "Simple"
+										}
+									}
+								},
+								"loanDetail": {
+									"applicationReceivedDate": "2016-12-21",
+									"assumabilityIndicator": false,
+									"balloonIndicator": false,
+									"borrowerCount": 1,
+									"buydownTemporarySubsidyIndicator": false,
+									"capitalizedLoanIndicator": false,
+									"constructionLoanIndicator": false,
+									"convertibleIndicator": false,
+									"escrowIndicator": false,
+									"interestOnlyIndicator": false,
+									"loanAffordableIndicator": false,
+									"prepaymentPenaltyIndicator": false,
+									"relocationLoanIndicator": false,
+									"sharedEquityIndicator": false,
+									"totalMortgagedPropertiesCount": 0
+								},
+								"loanLevelCredit": {
+									"loanLevelCreditDetail": {
+										"loanLevelCreditScoreSelectionMethodType": "MiddleOrLowerThenLowest",
+										"loanLevelCreditScoreValue": 730
+									}
+								},
+								"loanState": {
+									"loanStateDate": "2017-01-15",
+									"loanStateType": "AtClosing"
+								},
+								"ltv": {
+									"baseLtvratioPercent": 80,
+									"ltvratioPercent": 80
+								},
+								"maturity": {
+									"maturityRule": {
+										"loanMaturityDate": "2047-02-01",
+										"loanMaturityPeriodCount": 360,
+										"loanMaturityPeriodType": "Month"
+									}
+								},
+								"payment": {
+									"paymentRule": {
+										"initialPrincipalAndInterestPaymentAmount": 1438.920000000000072759576141834259033203125,
+										"paymentFrequencyType": "Monthly",
+										"scheduledFirstPaymentDate": "2017-03-01"
+									}
+								},
+								"qualification": {
+									"borrowerReservesMonthlyPaymentCount": 4,
+									"totalLiabilitiesMonthlyPaymentAmount": 2860,
+									"totalMonthlyIncomeAmount": 13000,
+									"totalMonthlyProposedHousingExpenseAmount": 1820
+								},
+								"selectedLoanProduct": {
+									"priceLocks": {
+										"priceLock": {
+											"priceLockDatetime": "2017-01-05"
+										}
+									}
+								},
+								"termsOfMortgage": {
+									"lienPriorityType": "FirstLien",
+									"loanPurposeType": "Purchase",
+									"mortgageType": "Conventional",
+									"noteAmount": 240000,
+									"noteDate": "2017-01-15",
+									"noteRatePercent": 6
+								},
+								"underwriting": {
+									"automatedUnderwritings": {
+										"automatedUnderwriting": {
+											"automatedUnderwritingCaseIdentifier": 9876543210
+										}
+									},
+									"underwritingDetail": {
+										"loanManualUnderwritingIndicator": true
+									}
+								}
+							},
+							{
+								"investorLoanInformation": {
+									"investorOwnershipPercent": 100,
+									"investorRemittanceType": "ActualInterestActualPrincipal"
+								},
+								"loanDetail": {
+									"mortgageModificationIndicator": false,
+									"warehouseLenderIndicator": true
+								},
+								"loanIdentifiers": {
+									"loanIdentifier": [
+										{
+											"investorCommitmentIdentifier": 999999
+										},
+										{
+											"mersMinidentifier": 987654321123456000
+										},
+										{
+											"sellerLoanIdentifier": 123456789
+										},
+										{
+											"extension": {
+												"other": {
+													"loanIdentifierExtension": {
+														"loanIdentifier": 10000000000000000139372116959414099130712064,
+														"loanIdentifierType": "UniversalLoan"
+													}
+												}
+											}
+										}
+									]
+								},
+								"loanState": {
+									"loanStateDate": "2017-01-25",
+									"loanStateType": "Current"
+								},
+								"miData": {
+									"miDataDetail": {
+										"primaryMiabsenceReasonType": "NoMIBasedOnOriginalLTV"
+									}
+								},
+								"payment": {
+									"paymentSummary": {
+										"lastPaidInstallmentDueDate": "2017-02-01",
+										"upbamount": 240000
+									}
+								},
+								"servicing": {
+									"delinquencySummary": {
+										"delinquentPaymentsOverPastTwelveMonthsCount": 0
+									}
+								}
+							},
+							{
+								"heloc": {
+									"helocOccurrences": {
+										"helocOccurrence": {
+											"currentHelocmaximumBalanceAmount": 45000,
+											"helocbalanceAmount": 0
+										}
+									}
+								},
+								"loanDetail": {
+									"helocindicator": true,
+									"loanAffordableIndicator": false
+								},
+								"loanState": {
+									"loanStateDate": "2017-01-25",
+									"loanStateType": "Current"
+								},
+								"termsOfMortgage": {
+									"lienPriorityType": "SecondLien",
+									"mortgageType": "Conventional"
+								}
+							}
+						]
+					},
+					"parties": {
+						"party": [
+							{
+								"roles": {
+									"role": {
+										"appraiser": {
+											"appraiserLicense": {
+												"appraiserLicenseIdentifier": "123456ABC"
+											}
+										},
+										"roleDetail": {
+											"partyRoleType": "Appraiser"
+										}
+									}
+								}
+							},
+							{
+								"roles": {
+									"role": {
+										"appraiserSupervisor": {
+											"appraiserLicense": {
+												"appraiserLicenseIdentifier": "1234ABC"
+											}
+										},
+										"roleDetail": {
+											"partyRoleType": "AppraiserSupervisor"
+										}
+									}
+								}
+							},
+							{
+								"individual": {
+									"name": {
+										"firstName": "John",
+										"lastName": "Smith",
+										"middleName": "Q",
+										"suffixName": "JR"
+									}
+								},
+								"roles": {
+									"role": {
+										"borrower": {
+											"borrowerDetail": {
+												"borrowerAgeAtApplicationYearsCount": 44,
+												"borrowerBirthDate": "1972-01-02",
+												"borrowerClassificationType": "Primary",
+												"borrowerMailToAddressSameAsPropertyIndicator": true,
+												"borrowerQualifyingIncomeAmount": 13000
+											},
+											"creditScores": {
+												"creditScore": {
+													"creditScoreDetail": {
+														"creditReportIdentifier": 5432109876,
+														"creditRepositorySourceIndicator": true,
+														"creditRepositorySourceType": "Equifax",
+														"creditScoreValue": 730
+													}
+												}
+											},
+											"declaration": {
+												"declarationDetail": {
+													"bankruptcyIndicator": false,
+													"borrowerFirstTimeHomebuyerIndicator": true,
+													"citizenshipResidencyType": "USCitizen",
+													"loanForeclosureOrJudgmentIndicator": false
+												}
+											},
+											"employers": {
+												"employer": {
+													"employment": {
+														"employmentBorrowerSelfEmployedIndicator": false
+													}
+												}
+											},
+											"governmentMonitoring": {
+												"governmentMonitoringDetail": {
+													"extension": {
+														"other": {
+															"governmentMonitoringDetailExtension": {
+																"hmdaethnicityCollectedBasedOnVisualObservationOrSurnameIndicator": false,
+																"hmdaethnicityRefusalIndicator": false,
+																"hmdagenderCollectedBasedOnVisualObservationOrNameIndicator": false,
+																"hmdagenderRefusalIndicator": false,
+																"hmdagenderType": "Male",
+																"hmdaraceCollectedBasedOnVisualObservationOrSurnameIndicator": false,
+																"hmdaraceRefusalIndicator": false
+															}
+														}
+													}
+												},
+												"hmdaRaces": {
+													"hmdaRace": [
+														{
+															"extension": {
+																"other": {
+																	"hmdaRaceExtension": {
+																		"hmdaRaceDesignations": {
+																			"hmdaRaceDesignation": {
+																				"hmdaraceDesignationOtherAsianDescription": "Taiwanese",
+																				"hmdaraceDesignationType": "OtherAsian"
+																			}
+																		},
+																		"hmdaRaceDetail": {
+																			"hmdaraceType": "Asian"
+																		}
+																	}
+																}
+															}
+														},
+														{
+															"extension": {
+																"other": {
+																	"hmdaRaceExtension": {
+																		"hmdaRaceDetail": {
+																			"hmdaraceType": "NativeHawaiianOrOtherPacificIslander"
+																		}
+																	}
+																}
+															}
+														}
+													]
+												},
+												"extension": {
+													"other": {
+														"governmentMonitoringExtension": {
+															"hmdaEthnicities": {
+																"hmdaEthnicity": {
+																	"hmdaethnicityType": "NotHispanicOrLatino"
+																}
+															}
+														}
+													}
+												}
+											}
+										},
+										"roleDetail": {
+											"partyRoleType": "Borrower"
+										}
+									}
+								},
+								"taxpayerIdentifiers": {
+									"taxpayerIdentifier": {
+										"taxpayerIdentifierType": "SocialSecurityNumber",
+										"taxpayerIdentifierValue": 888123456
+									}
+								}
+							},
+							{
+								"roles": {
+									"partyRoleIdentifiers": {
+										"partyRoleIdentifier": {
+											"partyRoleIdentifier": 99999398668
+										}
+									},
+									"role": {
+										"roleDetail": {
+											"partyRoleType": "DocumentCustodian"
+										}
+									}
+								}
+							},
+							{
+								"roles": {
+									"partyRoleIdentifiers": {
+										"partyRoleIdentifier": {
+											"partyRoleIdentifier": 554433
+										}
+									},
+									"role": {
+										"roleDetail": {
+											"partyRoleType": "LoanOriginationCompany"
+										}
+									}
+								}
+							},
+							{
+								"roles": {
+									"partyRoleIdentifiers": {
+										"partyRoleIdentifier": {
+											"partyRoleIdentifier": 221100
+										}
+									},
+									"role": {
+										"loanOriginator": {
+											"loanOriginatorType": "Correspondent"
+										},
+										"roleDetail": {
+											"partyRoleType": "LoanOriginator"
+										}
+									}
+								}
+							},
+							{
+								"roles": {
+									"partyRoleIdentifiers": {
+										"partyRoleIdentifier": {
+											"partyRoleIdentifier": 999999999
+										}
+									},
+									"role": {
+										"roleDetail": {
+											"partyRoleType": "LoanSeller"
+										}
+									}
+								}
+							},
+							{
+								"legalEntity": {
+									"legalEntityDetail": {
+										"fullName": "First Correspondent"
+									}
+								},
+								"roles": {
+									"role": {
+										"roleDetail": {
+											"partyRoleType": "NotePayTo"
+										}
+									}
+								}
+							},
+							{
+								"roles": {
+									"partyRoleIdentifiers": {
+										"partyRoleIdentifier": {
+											"partyRoleIdentifier": 444444455
+										}
+									},
+									"role": {
+										"roleDetail": {
+											"partyRoleType": "Payee"
+										}
+									}
+								}
+							},
+							{
+								"roles": {
+									"partyRoleIdentifiers": {
+										"partyRoleIdentifier": {
+											"partyRoleIdentifier": 999999999
+										}
+									},
+									"role": {
+										"roleDetail": {
+											"partyRoleType": "Servicer"
+										}
+									}
+								}
+							},
+							{
+								"roles": {
+									"partyRoleIdentifiers": {
+										"partyRoleIdentifier": {
+											"partyRoleIdentifier": 444444444
+										}
+									},
+									"role": {
+										"roleDetail": {
+											"partyRoleType": "WarehouseLender"
+										}
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		},
+		"parties": {
+			"party": {
+				"roles": {
+					"partyRoleIdentifiers": {
+						"partyRoleIdentifier": {
+							"partyRoleIdentifier": 100
+						}
+					},
+					"role": {
+						"roleDetail": {
+							"partyRoleType": "LoanDeliveryFilePreparer"
+						}
+					}
+				}
+			}
+		}
+	}
+}

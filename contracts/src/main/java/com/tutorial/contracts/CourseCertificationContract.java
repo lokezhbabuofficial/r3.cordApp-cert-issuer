@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class CourseCertificationContract implements Contract {
 
-	private static final CordaX500Name Examinar = CordaX500Name.parse("O=CordaExaminar,L=Tamilnadu,C=IN");
+	private static final CordaX500Name Examinar = CordaX500Name.parse("O=CordaExaminar,L=New York,C=US");
 
 	@Override
 	public void verify(@NotNull LedgerTransaction tx) throws IllegalArgumentException {
